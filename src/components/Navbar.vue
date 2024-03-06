@@ -1,5 +1,11 @@
 <script>
+import FilmFounder from '../components/FilmFounder.vue';
 
+export default {
+  components: {
+    FilmFounder
+  }
+}
 </script>
 
 
@@ -8,6 +14,8 @@
     <nav>
         APPLICATA MA CHE STILIZIAMO DOPO.
     </nav>
+
+    <FilmFounder></FilmFounder>
 
 </template>
 

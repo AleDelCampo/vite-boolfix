@@ -14,7 +14,9 @@ export default {
 <template>
 
   <Navbar></Navbar>
+  
   <AppMain></AppMain>
+
 </template>
 
 
