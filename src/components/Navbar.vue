@@ -1,7 +1,6 @@
 <script>
 import FilmFounder from '../components/FilmFounder.vue';
 import { store } from '../store.js';
-import axios from 'axios';
 
 export default {
   components: {
@@ -21,7 +20,10 @@ export default {
 
   <nav>
 
-    APPLICATA MA CHE STILIZIAMO DOPO.
+    <div>
+      <img src="/public/mylogo.png" alt="">
+    </div>
+    
     <FilmFounder></FilmFounder>
 
   </nav>
@@ -34,10 +36,12 @@ export default {
 nav {
   width: 100%;
   height: 80px;
-  background-color: burlywood;
+  background: rgb(2,0,36);
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(58,9,121,1) 25%, rgba(59,28,134,1) 34%, rgba(50,35,134,1) 45%, rgba(28,51,134,1) 65%);
   display: flex;
   align-items: center;
-  justify-content: center;
+  padding: 40px;
+  justify-content: space-between;
 }
 
 </style>

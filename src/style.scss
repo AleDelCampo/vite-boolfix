@@ -18,3 +18,8 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+html {
+  background: rgb(62,63,70);
+  background: linear-gradient(90deg, rgba(62,63,70,1) 5%, rgba(60,54,68,1) 28%, rgba(40,39,45,1) 41%, rgba(28,27,32,1) 78%, rgba(12,20,28,1) 96%);
+}
