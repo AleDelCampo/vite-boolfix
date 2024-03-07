@@ -16,8 +16,19 @@ export default {
         axios.get(`https://api.themoviedb.org/3/search/movie?api_key=03d6753f3d360fdeafb03f1042471a0a&query=${this.searchTitle}`)
         .then(res => {
             this.store.films = res.data.results;
-            console.log(res.data.results);
         })
+    },
+
+    searchTv() {
+        axios.get(`https://api.themoviedb.org/3/search/tv?api_key=03d6753f3d360fdeafb03f1042471a0a&query=${this.searchTitle}`)
+        .then(res => {
+            this.store.series = res.data.results;
+        })
+    },
+
+    searchAll() {
+      this.searchFilms();
+      this.searchTv();
     }
   }
 };
@@ -28,7 +39,7 @@ export default {
 
   <div id="search-bar">
     <input type="search" v-model="searchTitle" placeholder="Cerca">
-    <button class="btn" @click="searchFilms">Cerca</button>
+    <button class="btn" @click="searchAll">Cerca</button>
   </div>
 
 </template>

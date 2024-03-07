@@ -35,13 +35,6 @@ export default {
           return '../public/mobile-logo.png';
       }
     },
-    searchFilms() {
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=03d6753f3d360fdeafb03f1042471a0a&query=${this.searchTitle}`)
-        .then(res => {
-          this.store.films = res.data.results;
-          console.log(res.data.results);
-        })
-    }
   }
 }
 </script>
@@ -59,6 +52,16 @@ export default {
     </div>
   </div>
 
+  <div id="series-container">
+    <div v-for="tvSeries in store.series" :key="tvSeries.id">
+      <h3>{{ tvSeries.title }}</h3>
+      <h2>{{ tvSeries.original_title }}</h2>
+      <img :src="imageFlag(tvSeries.original_language)" alt="Flag" />
+      <p>{{ tvSeries.overview }}</p>
+      <span>{{ tvSeries.vote_average }}</span>
+    </div>
+  </div>
+
 </template>
 
 
@@ -73,4 +76,13 @@ export default {
   color: black;
 }
 
+
+#series-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px;
+  background-color: moccasin;
+  border-radius: 24px;
+  color: black;
+}
 </style>

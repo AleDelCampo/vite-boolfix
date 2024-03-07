@@ -13,17 +13,6 @@ export default {
       store,
     }
   },
-
-  methods: {
-    
-    searchFilms() {
-      axios.get(`https://api.themoviedb.org/3/search/movie?api_key=03d6753f3d360fdeafb03f1042471a0a&query=${this.searchTitle}`)
-        .then(res => {
-          this.store.films = res.data.results;
-          console.log(res.data.results);
-        })
-    }
-  }
 }
 </script>
 
