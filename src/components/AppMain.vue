@@ -45,6 +45,7 @@ export default {
   <div id="film-container">
     <div v-for="film in store.films" :key="film.id">
       <h3>{{ film.title }}</h3>
+      <img :src="'https://image.tmdb.org/t/p/w300' + film.backdrop_path" alt="Label" />
       <h2>{{ film.original_title }}</h2>
       <img :src="imageFlag(film.original_language)" alt="Flag" />
       <p>{{ film.overview }}</p>
