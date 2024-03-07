@@ -140,6 +140,10 @@ export default {
   transition: opacity 0.3s ease;
 }
 
+.fa-star {
+  color: yellow;
+}
+
 .card-image:hover .overlay {
   opacity: 1;
 }

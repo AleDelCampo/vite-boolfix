@@ -10,8 +10,16 @@ export default {
   data() {
     return {
       store,
+      showDropdown: false,
+      userImage: "/public/useryellow.webp"
     }
   },
+
+  methods: {
+    changeUserIcon(image) {
+      this.userImage = image;
+    }
+  }
 }
 </script>
 
@@ -20,19 +28,37 @@ export default {
 
   <nav>
 
-    <div>
+    <div id="ciao">
       <img src="/public/mylogo.png" alt="">
+        <div id="links">
+          <ul>
+            <li><a href="#">Serie Tv</a></li>
+            <li><a href="#">Nuovi Film</a></li>
+            <li><a href="#">Generi</a></li>
+            <li><a href="#">Cooming Soon</a></li>
+        </ul>
+      </div>
     </div>
     
-    <FilmFounder></FilmFounder>
-
-    
-    <div id="user">
-      <img src="/public/useryellow.webp" alt="">
-      <i class="fa-solid fa-chevron-down"></i>
-    </div>
-
     <div id="logs-btn">
+
+      <FilmFounder></FilmFounder>
+      <div id="user" @mouseenter="showDropdown = true" @mouseleave="showDropdown = false">
+        <img :src="userImage" alt="">
+        <i class="fa-solid fa-chevron-down"></i>
+        <div v-if="showDropdown" id="dropdown-menu">
+          <div @click="changeUserIcon('/public/useryellow.webp')">Yellow</div>
+          <div @click="changeUserIcon('/public/usergreen.webp')">Green</div>
+          <div @click="changeUserIcon('/public/userred.webp')">Red</div>
+          <div @click="changeUserIcon('/public/userblue.webp')">Blue</div>
+        </div>
+      </div>
+
+      <i class="fa-solid fa-bell">
+        <div id="notification">
+          2
+        </div>
+      </i>
 
       <button id="sign-in">
         Sign-In
@@ -41,7 +67,8 @@ export default {
       <button id="sign-up">
         Sign-Up
       </button>
-    </div>    
+    </div> 
+
   </nav>
 
 </template>
@@ -68,13 +95,40 @@ nav {
     opacity: 0.8;
     font-weight: bold;
   }
+
+  i {
+    cursor: pointer;
+  }
+}
+
+#ciao {
+  display: flex;
+  align-items: center;
+}
+
+.fa-bell {
+  color: rgb(184, 62, 62);
+  font-size: 30px;
+  position: relative;
+}
+
+#notification {
+  width: 18px;
+  height: 18px;
+  border-radius: 12px;
+  background-color: white;
+  font-size: 14px;
+  text-align: center;
+  position: absolute;
+  left: 18px;
+  top: 18px;
 }
 
 #user {
   display: flex;
   align-items: center;
   gap: 4px;
-  
+
   img {
     width: 30px;
   }
@@ -95,4 +149,53 @@ nav {
   color: red;
 }
 
+#user {
+  
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  
+  img {
+    width: 30px;
+  }
+
+#dropdown-menu {
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  color: black;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 8px;
+  z-index: 2;
+  cursor: pointer;
+
+    div {
+      padding: 8px 16px;
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }
+}
+
+#links {
+
+  list-style-type: none;
+  padding: 0;
+
+    li {
+      display: inline;
+    }
+
+    a {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+}
+}
 </style>
