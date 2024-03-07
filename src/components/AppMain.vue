@@ -15,6 +15,23 @@ export default {
   },
 
   methods: {
+
+    transformVoteAverage(vote) {
+      return Math.ceil(vote / 2);
+    },
+
+    starsVote(vote) {
+      let stars = '';
+      for (let i = 1; i <= 5; i++) {
+        if (i <= vote) {
+          stars += '<i class="fas fa-star"></i>';
+        } else {
+          stars += '<i class="far fa-star"></i>';
+        }
+      }
+      return stars;
+    },
+
     imageFlag(flag) {
       switch (flag) {
         case 'en':
@@ -49,17 +66,22 @@ export default {
       <h2>{{ film.original_title }}</h2>
       <img :src="imageFlag(film.original_language)" alt="Flag" />
       <p>{{ film.overview }}</p>
-      <span>{{ film.vote_average }}</span>
+      <div class="star-rating">
+        <span v-html="starsVote(transformVoteAverage(film.vote_average))"></span>
+      </div>
     </div>
   </div>
 
   <div id="series-container">
     <div v-for="tvSeries in store.series" :key="tvSeries.id">
       <h3>{{ tvSeries.title }}</h3>
+      <img :src="'https://image.tmdb.org/t/p/w300' + tvSeries.backdrop_path" alt="Label" />
       <h2>{{ tvSeries.original_title }}</h2>
       <img :src="imageFlag(tvSeries.original_language)" alt="Flag" />
       <p>{{ tvSeries.overview }}</p>
-      <span>{{ tvSeries.vote_average }}</span>
+      <div class="star-rating">
+        <span v-html="starsVote(transformVoteAverage(tvSeries.vote_average))"></span>
+      </div>
     </div>
   </div>
 
@@ -77,7 +99,6 @@ export default {
   color: black;
 }
 
-
 #series-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -85,5 +106,9 @@ export default {
   background-color: moccasin;
   border-radius: 24px;
   color: black;
+}
+
+.star-rating {
+  font-size: 24px;
 }
 </style>
