@@ -38,8 +38,8 @@ export default {
 <template>
 
   <div id="search-bar">
-    <input type="search" v-model="searchTitle" placeholder="Cerca">
-    <button class="btn" @click="searchAll">Cerca</button>
+    <input type="search" v-model="searchTitle" placeholder="Search a movie or series">
+    <button class="btn" @click="searchAll"><i class="fa-solid fa-magnifying-glass"></i></button>
   </div>
 
 </template>
@@ -48,15 +48,22 @@ export default {
 <style lang="scss">
   #search-bar {
     display: flex;
-  
+
     input {
-    padding: 6px 12px;
+    padding: 10px 12px;
+    border: none;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
   }
 
     button {
-    padding: 6px 12px;
+    padding: 10px 12px;
+    background-color: red;
+    opacity: 0.8;
+    border: none;
     cursor: pointer;
-
+    border-top-right-radius: 12px;
+    border-bottom-right-radius: 12px; 
   }
 }
 
