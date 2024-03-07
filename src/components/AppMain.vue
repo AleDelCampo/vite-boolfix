@@ -65,7 +65,7 @@ export default {
           <div class="overlay">
             <h3>{{ film.title }}</h3>
             <div class="details">
-              <h2>{{ film.original_title }}</h2>
+              <h2 class="title">{{ film.original_title }}</h2>
               <img :src="imageFlag(film.original_language)" alt="Flag" />
               <p class="overview">{{ film.overview }}</p>
               <div class="star-rating">
@@ -85,7 +85,7 @@ export default {
           <div class="overlay">
             <h3>{{ tvSeries.name }}</h3>
             <div class="details">
-              <h2>{{ tvSeries.original_name }}</h2>
+              <h2 class="title">{{ tvSeries.original_name }}</h2>
               <img :src="imageFlag(tvSeries.original_language)" alt="Flag" />
               <p class="overview">{{ tvSeries.overview }}</p>
               <div class="star-rating">
@@ -161,8 +161,13 @@ export default {
   font-size: 24px;
 }
 
+.title {
+  max-height: 80px;
+  overflow: hidden;
+}
+
 .overview {
-  max-height: 200px;
+  max-height: 180px;
   overflow: hidden;
 }
 </style>  
