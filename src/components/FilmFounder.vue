@@ -97,14 +97,20 @@ export default {
 
 
 <style lang="scss">
+
 #search-bar {
   display: flex;
+
+  i {
+    color: black;
+  }
 
   input {
     padding: 10px 12px;
     border: none;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
+    border-right: 2px solid #757575;
   }
 
   button {
@@ -115,6 +121,14 @@ export default {
     cursor: pointer;
     border-top-right-radius: 12px;
     border-bottom-right-radius: 12px;
+  }
+
+  select {
+    background-color: red;
+    opacity: 0.8;
+    color: black;
+    border: none;
+    border-right: 2px solid #757575;
   }
 }
 </style>

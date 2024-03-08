@@ -32,9 +32,9 @@ export default {
       <img src="/public/mylogo.png" alt="">
       <div id="links">
         <ul>
-          <li><a href="#">Serie Tv</a></li>
-          <li><a href="#">Nuovi Film</a></li>
-          <li><a href="#">Generi</a></li>
+          <li><a href="#">Tv Series</a></li>
+          <li><a href="#">New Movies</a></li>
+          <li><a href="#">Geners</a></li>
           <li><a href="#">Cooming Soon</a></li>
         </ul>
       </div>
@@ -100,15 +100,10 @@ nav {
   }
 }
 
+//#ID'S
 #logo {
   display: flex;
   align-items: center;
-}
-
-.fa-bell {
-  color: rgb(184, 62, 62);
-  font-size: 30px;
-  position: relative;
 }
 
 #notification {
@@ -198,4 +193,12 @@ nav {
     padding: 5px 10px;
   }
 }
+//.CLASSESS
+
+.fa-bell {
+  color: rgb(184, 62, 62);
+  font-size: 30px;
+  position: relative;
+}
+
 </style>

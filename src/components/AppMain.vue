@@ -103,9 +103,11 @@ export default {
 
 <template>
   <div id="container">
-    <h1>RATED MOVIES::</h1>
-    <div class="cards-container">
-      <div class="cards" v-for="film in ratedMovies" :key="film.id">
+    <iframe width="100%" height="600px" src="https://www.youtube.com/embed/U2Qp5pL3ovA" frameborder="0" allowfullscreen></iframe>
+
+    <h1>RATED MOVIES:</h1>
+    <div class="cards-container-rated">
+      <div class="cards-rated" v-for="film in ratedMovies" :key="film.id">
         <div class="card-image"
           :style="{ backgroundImage: film.backdrop_path ? 'url(https://image.tmdb.org/t/p/w300' + film.backdrop_path + ')' : 'url(https://img.freepik.com/free-vector/coming-soon-background-with-focus-light-effect-design_1017-27277.jpg?size=338&ext=jpg&ga=GA1.1.1292351815.1709769600&semt=ais)' }">
           <div class="overlay">
@@ -126,12 +128,11 @@ export default {
         </div>
       </div>
     </div>
-  </div>
+    <div>
 
-  <div>
     <h1>RATED SERIES:</h1>
-    <div class="cards-container">
-      <div class="cards" v-for="series in ratedSeries" :key="series.id">
+    <div class="cards-container-rated">
+      <div class="cards-rated" v-for="series in ratedSeries" :key="series.id">
         <div class="card-image"
           :style="{ backgroundImage: series.backdrop_path ? 'url(https://image.tmdb.org/t/p/w300' + series.backdrop_path + ')' : 'url(https://img.freepik.com/free-vector/coming-soon-background-with-focus-light-effect-design_1017-27277.jpg?size=338&ext=jpg&ga=GA1.1.1292351815.1709769600&semt=ais)' }">
           <div class="overlay">
@@ -152,8 +153,9 @@ export default {
         </div>
       </div>
     </div>
+  
 
-    <h1>FILM:</h1>
+    <h1>MOVIES:</h1>
     <div class="cards-container">
       <div class="cards" v-for="film in store.films" :key="film.id">
         <div class="card-image"
@@ -178,7 +180,7 @@ export default {
     </div>
 
 
-    <h1>SERIES:</h1>
+    <h1>SERIES:</h1>  
     <div class="cards-container">
       <div class="cards" v-for="tvSeries in store.series" :key="tvSeries.id">
         <div class="card-image"
@@ -198,6 +200,7 @@ export default {
                   <p>Stagione {{ season.season_number }} - Episodi: {{ season.episode_count }}</p>
                 </div>
               </div>
+              </div>
             </div>
           </div>
         </div>
@@ -208,10 +211,40 @@ export default {
 
 
 <style lang="scss">
+
+//#ID'S
 #container {
   padding: 20px;
 }
 
+//::SEARCHBAR'S
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 12px; 
+}
+
+.cards-container-rated::-webkit-scrollbar {
+  width: 100%;
+}
+
+.cards-container-rated::-webkit-scrollbar-thumb {
+  background-color: red;
+  border-radius: 12px;
+}
+
+.cards-container-rated::-webkit-scrollbar-track-piece {
+  border-radius: 12px;
+}
+
+//.CLASSES
 .series-seasons {
   position: absolute;
   top: 60%;
@@ -250,9 +283,24 @@ export default {
   padding: 20px;
 }
 
+.cards-container-rated {
+  width: 100%;
+  display: flex;
+  overflow-x: auto;
+  white-space: nowrap;
+  text-wrap: wrap;
+}
+
+.cards-rated {
+  width: 40%; 
+  margin-right: 10px; 
+  flex-shrink: 0;
+}
+
 .cards {
   width: 19%;
   margin-bottom: 20px;
+  height: 100%;
 }
 
 .card-image {
@@ -276,10 +324,6 @@ export default {
   transition: opacity 0.3s ease;
 }
 
-.fa-star {
-  color: yellow;
-}
-
 .card-image:hover .overlay {
   opacity: 1;
 }
@@ -297,6 +341,11 @@ export default {
   font-size: 24px;
 }
 
+
+.fa-star {
+  color: yellow;
+}
+
 .title {
   max-height: 80px;
   overflow: hidden;
@@ -304,6 +353,6 @@ export default {
 
 .overview {
   max-height: 180px;
-  overflow: hidden;
+  overflow-y: scroll;
 }
 </style>
