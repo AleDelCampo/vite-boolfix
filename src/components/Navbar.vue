@@ -28,18 +28,18 @@ export default {
 
   <nav>
 
-    <div id="ciao">
+    <div id="logo">
       <img src="/public/mylogo.png" alt="">
-        <div id="links">
-          <ul>
-            <li><a href="#">Serie Tv</a></li>
-            <li><a href="#">Nuovi Film</a></li>
-            <li><a href="#">Generi</a></li>
-            <li><a href="#">Cooming Soon</a></li>
+      <div id="links">
+        <ul>
+          <li><a href="#">Serie Tv</a></li>
+          <li><a href="#">Nuovi Film</a></li>
+          <li><a href="#">Generi</a></li>
+          <li><a href="#">Cooming Soon</a></li>
         </ul>
       </div>
     </div>
-    
+
     <div id="logs-btn">
 
       <FilmFounder></FilmFounder>
@@ -67,7 +67,7 @@ export default {
       <button id="sign-up">
         Sign-Up
       </button>
-    </div> 
+    </div>
 
   </nav>
 
@@ -75,12 +75,11 @@ export default {
 
 
 <style lang="scss" scoped>
-
 nav {
   width: 100%;
   height: 80px;
-  background: rgb(5,1,1);
-  background: linear-gradient(180deg, rgba(5,1,1,1) 0%, rgba(87,15,15,1) 20%, rgba(162,28,28,1) 50%, rgba(184,27,27,1) 80%, rgba(213,37,37,1) 100%);
+  background: rgb(5, 1, 1);
+  background: linear-gradient(180deg, rgba(5, 1, 1, 1) 0%, rgba(87, 15, 15, 1) 20%, rgba(162, 28, 28, 1) 50%, rgba(184, 27, 27, 1) 80%, rgba(213, 37, 37, 1) 100%);
   display: flex;
   align-items: center;
   padding: 40px;
@@ -101,7 +100,7 @@ nav {
   }
 }
 
-#ciao {
+#logo {
   display: flex;
   align-items: center;
 }
@@ -150,32 +149,33 @@ nav {
 }
 
 #user {
-  
+
   position: relative;
   display: flex;
   align-items: center;
   gap: 4px;
-  
+
   img {
     width: 30px;
   }
 
-#dropdown-menu {
+  #dropdown-menu {
 
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  color: black;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 8px;
-  z-index: 2;
-  cursor: pointer;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    color: black;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 8px;
+    z-index: 2;
+    cursor: pointer;
 
     div {
       padding: 8px 16px;
+
       &:hover {
         background-color: #f0f0f0;
       }
@@ -188,14 +188,14 @@ nav {
   list-style-type: none;
   padding: 0;
 
-    li {
-      display: inline;
-    }
+  li {
+    display: inline;
+  }
 
-    a {
+  a {
     text-decoration: none;
     color: white;
     padding: 5px 10px;
-}
+  }
 }
 </style>

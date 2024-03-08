@@ -10,7 +10,7 @@ export default {
       genresFilms: [],
       selectedGenreFilms: '',
       genresSeries: [],
-      selectedGenreSeries: ''
+      selectedGenreSeries: '',
     };
   },
 
@@ -65,7 +65,7 @@ export default {
         .then(res => {
           this.store.series = res.data.results;
         })
-    }
+    },
   }
 };
 </script>
@@ -79,41 +79,42 @@ export default {
 
     <select v-model="selectedGenreFilms" @change="filterFilmsByGenre(selectedGenreFilms)">
       <option value="">Select a genre for films</option>
-      <option v-for="genreFilms in genresFilms" :value="genreFilms.id" :key="genreFilms.id">{{ genreFilms.name }}</option>
+      <option v-for="genreFilms in genresFilms" :value="genreFilms.id" :key="genreFilms.id">{{ genreFilms.name }}
+      </option>
     </select>
 
     <select v-model="selectedGenreSeries" @change="filterSeriesByGenre(selectedGenreSeries)">
       <option value="">Select a genre for series</option>
-      <option v-for="genreSeries in genresSeries" :value="genreSeries.id" :key="genreSeries.id">{{ genreSeries.name }}</option>
+      <option v-for="genreSeries in genresSeries" :value="genreSeries.id" :key="genreSeries.id">{{ genreSeries.name }}
+      </option>
     </select>
 
     <button class="btn" @click="searchAll"><i class="fa-solid fa-magnifying-glass"></i></button>
-    
+
   </div>
 
 </template>
 
-  
-<style lang="scss">
-  #search-bar {
-    display: flex;
 
-    input {
+<style lang="scss">
+#search-bar {
+  display: flex;
+
+  input {
     padding: 10px 12px;
     border: none;
     border-top-left-radius: 12px;
     border-bottom-left-radius: 12px;
   }
 
-    button {
+  button {
     padding: 10px 12px;
     background-color: red;
     opacity: 0.8;
     border: none;
     cursor: pointer;
     border-top-right-radius: 12px;
-    border-bottom-right-radius: 12px; 
+    border-bottom-right-radius: 12px;
   }
 }
-
 </style>
