@@ -115,6 +115,8 @@ export default {
   background-position: center;
   position: relative;
   cursor: pointer;
+  perspective: 1000px;
+  transition: transform 0.5s;
 }
 
 .card-image .overlay {
@@ -127,6 +129,11 @@ export default {
   color: white;
   opacity: 0;
   transition: opacity 0.3s ease;
+}
+
+.card-image:hover {
+  perspective: 1000px;
+  transform: scale(1.05);
 }
 
 .card-image:hover .overlay {
