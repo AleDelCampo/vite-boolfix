@@ -5,8 +5,8 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      searchTitle: '',
       store,
+      searchTitle: '',
       genresFilms: [],
       selectedGenreFilms: '',
       genresSeries: [],
@@ -20,6 +20,20 @@ export default {
   },
 
   methods: {
+    searchRatedMovies() {
+      axios.get(`https://api.themoviedb.org/3/movie/top_rated?api_key=03d6753f3d360fdeafb03f1042471a0a&language=en-US`)
+        .then(res => {
+          this.ratedMovies = res.data.results;
+        })
+    },
+
+    searchRatedSeries() {
+      axios.get(`https://api.themoviedb.org/3/tv/top_rated?api_key=03d6753f3d360fdeafb03f1042471a0a&language=en-US`)
+        .then(res => {
+          this.ratedSeries = res.data.results;
+        })
+    },
+
     searchFilms() {
       axios.get(`https://api.themoviedb.org/3/search/movie?api_key=03d6753f3d360fdeafb03f1042471a0a&query=${this.searchTitle}`)
         .then(res => {

@@ -1,19 +1,17 @@
 <script>
-import FilmFounder from '../components/FilmFounder.vue';
+import AppCard from './AppCard.vue';
 import { store } from '../store.js';
 import axios from 'axios';
 
 export default {
   components: {
-    FilmFounder
+    AppCard
   },
 
   data() {
     return {
       store,
       selectedFilmId: null,
-      cast: [],
-      seasons: [],
       ratedMovies: [],
       ratedSeries: [],
     }
@@ -25,7 +23,6 @@ export default {
   },
 
   methods: {
-
     async showSeasons(tvSeriesId) {
       try {
         const response = await axios.get(`https://api.themoviedb.org/3/tv/${tvSeriesId}?api_key=03d6753f3d360fdeafb03f1042471a0a&append_to_response=seasons`);
@@ -59,43 +56,6 @@ export default {
           this.ratedSeries = res.data.results;
         })
     },
-
-    transformVoteAverage(vote) {
-      return Math.ceil(vote / 2);
-    },
-
-    starsVote(vote) {
-      let stars = '';
-      for (let i = 1; i <= 5; i++) {
-        if (i <= vote) {
-          stars += '<i class="fas fa-star"></i>';
-        } else {
-          stars += '<i class="far fa-star"></i>';
-        }
-      }
-      return stars;
-    },
-
-    imageFlag(flag) {
-      switch (flag) {
-        case 'en':
-          return '../public/gb.png';
-        case 'fr':
-          return '../public/mf.png';
-        case 'es':
-          return '../public/es.png';
-        case 'it':
-          return '../public/it.png';
-        case 'cn':
-          return '../public/cn.png';
-        case 'ja':
-          return '../public/jp.png';
-        case 'de':
-          return '../public/de.png';
-        default:
-          return '../public/mobile-logo.png';
-      }
-    },
   }
 }
 </script>
@@ -106,106 +66,22 @@ export default {
     <iframe width="100%" height="600px" src="https://www.youtube.com/embed/U2Qp5pL3ovA" frameborder="0" allowfullscreen></iframe>
 
     <h1>RATED MOVIES:</h1>
-    <div class="cards-container-rated">
-      <div class="cards-rated" v-for="film in ratedMovies" :key="film.id">
-        <div class="card-image"
-          :style="{ backgroundImage: film.backdrop_path ? 'url(https://image.tmdb.org/t/p/w300' + film.backdrop_path + ')' : 'url(https://img.freepik.com/free-vector/coming-soon-background-with-focus-light-effect-design_1017-27277.jpg?size=338&ext=jpg&ga=GA1.1.1292351815.1709769600&semt=ais)' }">
-          <div class="overlay">
-            <h3>{{ film.title }}</h3>
-            <div class="details">
-              <h2 class="title">{{ film.original_title }}</h2>
-              <img :src="imageFlag(film.original_language)" alt="Flag" />
-              <p class="overview">{{ film.overview }}</p>
-              <div class="star-rating">
-                <span v-html="starsVote(transformVoteAverage(film.vote_average))"></span>
-              </div>
-              <button @click="showCast(film.id)">Mostra Cast</button>
-              <div class="cast-names" v-if="selectedFilmId === film.id">
-                <p v-for="actor in cast" :key="actor.id">{{ actor.name }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="rated-movies" class="cards-container-rated">
+    <AppCard class="cards-rated" :cards="ratedMovies" :cast="cast" :seasons="seasons" :selectedId="selectedFilmId" @show-cast="showCast" mediaType="movie"/>
     </div>
-    <div>
+    
 
     <h1>RATED SERIES:</h1>
-    <div class="cards-container-rated">
-      <div class="cards-rated" v-for="series in ratedSeries" :key="series.id">
-        <div class="card-image"
-          :style="{ backgroundImage: series.backdrop_path ? 'url(https://image.tmdb.org/t/p/w300' + series.backdrop_path + ')' : 'url(https://img.freepik.com/free-vector/coming-soon-background-with-focus-light-effect-design_1017-27277.jpg?size=338&ext=jpg&ga=GA1.1.1292351815.1709769600&semt=ais)' }">
-          <div class="overlay">
-            <h3>{{ series.name }}</h3>
-            <div class="details">
-              <h2 class="title">{{ series.original_name }}</h2>
-              <img :src="imageFlag(series.original_language)" alt="Flag" />
-              <p class="overview">{{ series.overview }}</p>
-              <div class="star-rating">
-                <span v-html="starsVote(transformVoteAverage(series.vote_average))"></span>
-              </div>
-              <button @click="showCast(series.id)">Mostra Cast</button>
-              <div class="cast-names" v-if="selectedSeriesId === series.id">
-                <p v-for="actor in cast" :key="actor.id">{{ actor.name }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div id="rated-series" class="cards-container-rated">
+    <AppCard class="cards-rated" :cards="ratedSeries" :cast="cast" :seasons="seasons" :selectedId="selectedFilmId" @show-seasons="showSeasons" mediaType="tv"/>
     </div>
-  
+    
 
     <h1>MOVIES:</h1>
-    <div class="cards-container">
-      <div class="cards" v-for="film in store.films" :key="film.id">
-        <div class="card-image"
-          :style="{ backgroundImage: film.backdrop_path ? 'url(https://image.tmdb.org/t/p/w300' + film.backdrop_path + ')' : 'url(https://img.freepik.com/free-vector/coming-soon-background-with-focus-light-effect-design_1017-27277.jpg?size=338&ext=jpg&ga=GA1.1.1292351815.1709769600&semt=ais)' }">
-          <div class="overlay">
-            <h3>{{ film.title }}</h3>
-            <div class="details">
-              <h2 class="title">{{ film.original_title }}</h2>
-              <img :src="imageFlag(film.original_language)" alt="Flag" />
-              <p class="overview">{{ film.overview }}</p>
-              <div class="star-rating">
-                <span v-html="starsVote(transformVoteAverage(film.vote_average))"></span>
-              </div>
-              <button @click="showCast(film.id)">Mostra Cast</button>
-              <div class="cast-names" v-if="selectedFilmId === film.id">
-                <p v-for="actor in cast" :key="actor.id">{{ actor.name }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
+    <AppCard :cards="store.films" :cast="cast" :seasons="seasons" :selectedId="selectedFilmId" @show-cast="showCast" mediaType="movie"/>
 
     <h1>SERIES:</h1>  
-    <div class="cards-container">
-      <div class="cards" v-for="tvSeries in store.series" :key="tvSeries.id">
-        <div class="card-image"
-          :style="{ backgroundImage: tvSeries.backdrop_path ? 'url(https://image.tmdb.org/t/p/w300' + tvSeries.backdrop_path + ')' : 'url(https://img.freepik.com/free-vector/coming-soon-background-with-focus-light-effect-design_1017-27277.jpg?size=338&ext=jpg&ga=GA1.1.1292351815.1709769600&semt=ais)' }">
-          <div class="overlay">
-            <h3>{{ tvSeries.name }}</h3>
-            <div class="details">
-              <h2 class="title">{{ tvSeries.original_name }}</h2>
-              <img :src="imageFlag(tvSeries.original_language)" alt="Flag" />
-              <p class="overview">{{ tvSeries.overview }}</p>
-              <div class="star-rating">
-                <span v-html="starsVote(transformVoteAverage(tvSeries.vote_average))"></span>
-              </div>
-              <button @click="showSeasons(tvSeries.id)">Mostra Stagioni</button>
-              <div class="series-seasons" v-if="selectedFilmId === tvSeries.id">
-                <div v-for="season in seasons" :key="season.season_number">
-                  <p>Stagione {{ season.season_number }} - Episodi: {{ season.episode_count }}</p>
-                </div>
-              </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <AppCard :cards="store.series" :cast="cast" :seasons="seasons" :selectedId="selectedFilmId" @show-seasons="showSeasons" mediaType="tv"/>
   </div>
 </template>
 
@@ -234,6 +110,7 @@ export default {
 .cards-container-rated::-webkit-scrollbar {
   width: 100%;
 }
+
 
 .cards-container-rated::-webkit-scrollbar-thumb {
   background-color: red;
@@ -275,84 +152,7 @@ export default {
   cursor: pointer;
 }
 
-.cards-container {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 20px;
-}
-
-.cards-container-rated {
-  width: 100%;
-  display: flex;
-  overflow-x: auto;
-  white-space: nowrap;
-  text-wrap: wrap;
-}
-
-.cards-rated {
-  width: 40%; 
-  margin-right: 10px; 
-  flex-shrink: 0;
-}
-
-.cards {
-  width: 19%;
-  margin-bottom: 20px;
-  height: 100%;
-}
-
-.card-image {
-  width: 100%;
-  height: 400px;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  cursor: pointer;
-}
-
-.card-image .overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card-image:hover .overlay {
-  opacity: 1;
-}
-
-.card-image .details {
-  padding: 20px;
-  text-align: left;
-}
-
-.card-image .details h3 {
-  margin-top: 0;
-}
-
-.star-rating {
-  font-size: 24px;
-}
-
-
 .fa-star {
   color: yellow;
-}
-
-.title {
-  max-height: 80px;
-  overflow: hidden;
-}
-
-.overview {
-  max-height: 180px;
-  overflow-y: scroll;
 }
 </style>
